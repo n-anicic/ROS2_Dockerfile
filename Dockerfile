@@ -2,16 +2,6 @@ FROM ros:humble-ros-base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
-    bash -c "\
-      sed -i '/packages.ros.org/d' /etc/apt/sources.list.d/* || true && \
-      apt-get update && \
-      apt-get install -y curl gnupg2 lsb-release ca-certificates && \
-      curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
-      echo 'deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main' > /etc/apt/sources.list.d/ros2.list && \
-      apt-get update"
-
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     cmake \
