@@ -4,13 +4,21 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN --mount=type=cache,target=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt \
-    bash -c "\
-      sed -i '/packages.ros.org/d' /etc/apt/sources.list.d/* || true && \
+    bash -c ' \
+      rm -f /etc/apt/sources.list.d/ros2.sources && \
+      \
       apt-get update && \
-      apt-get install -y curl gnupg2 lsb-release ca-certificates && \
+      apt-get install -y curl gnupg lsb-release && \
+      \
       curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
-      echo 'deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main' > /etc/apt/sources.list.d/ros2.list && \
-      apt-get update"
+      \
+      echo "Types: deb \
+URIs: http://packages.ros.org/ros2/ubuntu \
+Suites: $(lsb_release -cs \
+Components: main \
+Signed-By: /usr/share/keyrings/ros-archive-keyring.gpg" > /etc/apt/sources.list.d/ros2.sources && \
+      \
+      apt-get update'
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
