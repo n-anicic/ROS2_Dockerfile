@@ -23,6 +23,7 @@ RUN apt-get update && \
     gstreamer1.0-plugins-base \
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-bad \
+    gstreamer1.0-libav \
     gstreamer1.0-tools \
     # Now for python ROS2 robot simulator support
     python3-colcon-common-extensions \
