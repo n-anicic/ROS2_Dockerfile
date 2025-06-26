@@ -7,6 +7,8 @@ RUN apt-get update && \
     cmake \
     vim \
     curl \
+    iputils-ping \
+    net-tools \
     build-essential \
     git \
     protobuf-compiler \
