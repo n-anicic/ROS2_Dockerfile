@@ -29,6 +29,7 @@ RUN apt-get update && \
     python3-colcon-common-extensions \
     python3-rosdep \
     python3-vcstool \
+    ros-humble-rmw-cyclonedds-cpp \
     ros-humble-rclpy \
     ros-humble-std-msgs \
     ros-humble-std-srvs \
