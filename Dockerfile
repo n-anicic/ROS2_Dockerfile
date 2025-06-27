@@ -9,6 +9,7 @@ RUN apt-get update && \
     curl \
     iputils-ping \
     net-tools \
+    iproute2 \
     build-essential \
     git \
     protobuf-compiler \
