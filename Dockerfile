@@ -2,48 +2,9 @@ FROM ros:humble-ros-base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    cmake \
-    vim \
-    curl \
-    iputils-ping \
-    net-tools \
-    iproute2 \
-    build-essential \
-    git \
-    protobuf-compiler \
-    tree \
-    mesa-utils \
-    libgl1-mesa-glx \
-    libgl1-mesa-dri \
-    ros-humble-rviz2 \
-    python3-pip \
-    clang \
-    libclang-dev\
-    pkg-config \
-    libglib2.0-dev \
-    libgstreamer-plugins-base1.0-dev \
-    gstreamer1.0-plugins-base \
-    gstreamer1.0-plugins-good \
-    gstreamer1.0-plugins-bad \
-    gstreamer1.0-libav \
-    gstreamer1.0-tools \
-    # Now for python ROS2 robot simulator support
-    python3-colcon-common-extensions \
-    python3-rosdep \
-    python3-vcstool \
-    ros-humble-rmw-cyclonedds-cpp \
-    ros-humble-rclpy \
-    ros-humble-std-msgs \
-    ros-humble-std-srvs \
-    python3-gst-1.0 \
-    gir1.2-gstreamer-1.0 \
-    gir1.2-gst-plugins-base-1.0 \
-    # ros-humble-turtlesim \
-    x11-apps && \
-    # Clean up apt cache to keep image smaller
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential cmake curl git python3-pip vim clang libclang-dev pkg-config && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends python3-colcon-common-extensions python3-rosdep python3-vcstool ros-humble-rmw-cyclonedds-cpp ros-humble-rclpy ros-humble-std-msgs ros-humble-std-srvs ros-humble-rviz2 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends iputils-ping net-tools iproute2 protobuf-compiler tree mesa-utils libgl1-mesa-glx libgl1-mesa-dri libglib2.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-tools python3-gst-1.0 gir1.2-gstreamer-1.0 gir1.2-gst-plugins-base-1.0 x11-apps && rm -rf /var/lib/apt/lists/*
 
 # Reset the environment variable
 ENV RUSTUP_HOME=/usr/local/rustup \
